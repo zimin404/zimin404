@@ -18,6 +18,11 @@
         foreach($links as $link){
             $content = file_get_html($lenta.$link->href);
             if($content){
+
+                $title = $content->find('.topic-body__titles')[0]->plaintext;
+                echo $title;
+                die();
+
                 if($content->find('.picture__image')){
                     //$content->find('.picture__image')[0]->src
                 }
