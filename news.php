@@ -18,13 +18,9 @@
         foreach($links as $link){
             $content = file_get_html($lenta.$link->href);
             if($content){
-                if($content->find('.picture__image')[0]){
-                    echo $content->find('.picture__image')[0]->src."<br>";
-                }else{
-                    echo 'net';
+                if($content->find('.picture__image')){
+                    //$content->find('.picture__image')[0]->src
                 }
-            }else{
-                echo '<li>no</li>';
             }
         }
     ?>
