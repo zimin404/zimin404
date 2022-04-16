@@ -16,8 +16,13 @@
         $links = $site->find('._longgrid');
 
         foreach($links as $link){
-            if(file_get_html($lenta.$link->href)){
-                echo '<li>Work</li>';
+            $content = file_get_html($lenta.$link->href);
+            if($content){
+                if($content->find('.picture__image')[0]){
+                    echo $content->find('.picture__image')[0]->src."<br>";
+                }else{
+                    echo 'net';
+                }
             }else{
                 echo '<li>no</li>';
             }
