@@ -21,6 +21,13 @@
 
                 $title = $content->find('.topic-body__titles')[0]->plaintext;
 
+                $text='';
+
+                foreach($content->find('.topic-body__content-text') as $paragraph){
+                    $text .= "<p>$paragraph->plaintext</p>";
+                }
+
+
                 if($content->find('.picture__image')){
                     //$content->find('.picture__image')[0]->src
                 }
