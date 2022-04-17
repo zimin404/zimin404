@@ -33,7 +33,6 @@
                     file_put_contents(pathinfo($img_url)['filename'].".jpg", file_get_contents($img_url));
                 }
 
-                die();
             }
         }
     ?>
