@@ -7,35 +7,38 @@
     <title>Document</title>
 </head>
 <body>
-    <ol>
+<ol>
     <?php
-        require "simple_html_dom.php";
-        $lenta =  'https://lenta.ru/';
-        $site = file_get_html('https://lenta.ru/rubrics/economics/');
+    require "simple_html_dom.php";
+    require "db.php";
+    $lenta =  'https://lenta.ru/';
+    $site = file_get_html('https://lenta.ru/rubrics/economics/');
 
-        $links = $site->find('._longgrid');
+    $links = $site->find('._longgrid');
 
-        foreach($links as $link){
-            $content = file_get_html($lenta.$link->href);
-            if($content){
+    foreach($links as $link){
+        $content = file_get_html($lenta.$link->href);
+        if($content){
 
-                $title = $content->find('.topic-body__titles')[0]->plaintext;
+            $title = $content->find('.topic-body__titles')[0]->plaintext;
 
-                $text='';
+            $text='';
 
-                foreach($content->find('.topic-body__content-text') as $paragraph){
-                    $text .= "<p>$paragraph->plaintext</p>";
-                }
-
-
-                if($content->find('.picture__image')){
-                    $img_url = $content->find('.picture__image')[0]->src;
-                    file_put_contents(pathinfo($img_url)['filename'].".jpg", file_get_contents($img_url));
-                }
-
+            foreach($content->find('.topic-body__content-text') as $paragraph){
+                $text .= "<p>$paragraph->plaintext</p>";
             }
+
+
+            if($content->find('.picture__image')){
+                $img_url = $content->find('.picture__image')[0]->src;
+                $folder = "../wp-content/uploads/".date('Y')."/".date('m')."/";
+                file_put_contents($folder.pathinfo($img_url)['filename'].".jpg", file_get_contents($img_url));
+            }
+            die();
+
         }
+    }
     ?>
-    </ol>
+</ol>
 </body>
 </html>
